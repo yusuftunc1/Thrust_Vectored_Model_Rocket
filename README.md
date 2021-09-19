@@ -1,8 +1,8 @@
 # Astrea
 THRUST VECTORED MODEL ROCKET 
 
-It is a simple system that aims to determine the state of the rocket and keep the rocket stable with the angle and acceleration sensor (mpu6050).  
-The system generates a response using the PID control system. By transferring this response to the servos thrust is actively controlled by system.
+It is a simple system that aims to determine the state of the rocket and keep the rocket stable with the angle and acceleration sensor (mpu6050). The system generates 
+a response using the PID control system. By transferring this response to the servos thrust is actively controlled by system.
 
 System also has a bmp180 pressure sensor to determine altitude. and there is a nrf24 in the system to provide communication and data transfer with the ground station.
 
