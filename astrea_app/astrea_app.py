@@ -96,6 +96,8 @@ class myApp(QtWidgets.QMainWindow): #interface
         self.canvasx.draw()
         self.canvasy.draw()
         self.canvasalt.draw()
+        
+
 
 
     #connect
@@ -115,7 +117,12 @@ class myApp(QtWidgets.QMainWindow): #interface
             self.ui.pushButton.setEnabled(False)
             self.ui.comboBox.setEnabled(False)
             self.ui.comboBox_2.setEnabled(False)
+            
             self.animation()  #def
+            
+
+            
+
     
 
     #disconnect
@@ -134,12 +141,12 @@ class myApp(QtWidgets.QMainWindow): #interface
     def savingData (self):
         self.incomingMessage = str(self.mySerial.data.decode())
         values = self.incomingMessage.split()
-        x = int(values[0])
-        y = int(values[1])
-        temp = int(values[2])
-        pressure = int(values[3])
-        altitude = int(values[4])
-        accZ = int(values[5])
+        x = float(values[0])
+        y = float(values[1])
+        temp = float(values[2])
+        pressure = float(values[3])
+        altitude = float(values[4])
+        accZ = float(values[5])
         control1 = int(values[6])
         control2 = int(values[7])
 
@@ -162,27 +169,13 @@ class myApp(QtWidgets.QMainWindow): #interface
             }
             csv_writer.writerow(info)
         
-        self.writedata()
-    
-
-    def writedata(self):
-        data = pd.read_csv("data.csv")
-        np_alt = np.array()
-        alt = int(data["altitude"])
-        np_alt = np.append(np_alt,alt)
-
         self.ui.textEdit_2.append("----CURRENT VALUES----")
-        self.ui.textEdit_2.append(f'Tempature : {data["temp"]}')
-        self.ui.textEdit_2.append(f'Pressure: {data["pressure"]}')
-        self.ui.textEdit_2.append(f'Acceleration : {data["accZ"]}')
-        self.ui.textEdit_2.append(f"Max altitude: {np_alt.max()}")
+        self.ui.textEdit_2.append(f'Tempature : {values[2]}')
+        self.ui.textEdit_2.append(f'Pressure: {values[3]}')
+        self.ui.textEdit_2.append(f'Acceleration : {values[5]}')
 
-        if (int(data["control1"]) == 1) :
-            self.ui.textEdit.append("ACENDING START")
-        if (int(data["control2"]) == 1):
-            self.ui.textEdit.append("DESCENDING START")
-            QtCore.QTimer.singleShot(2000, self.ui.textEdit.append("PARACHUTE DEPLOYMENT"))
-        
+
+
 
 
 
